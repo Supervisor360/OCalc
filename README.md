@@ -29,14 +29,16 @@ PERC - Percentage
 AVRG - Average Number
 MEDN - Median Number
 RAND - Random Number
-TRIG - Trigonometry
-PYTH - Pythagorian Theorem
+TRIG - Trigonometry (WIP)
+PYTH - Pythagorian Theorem (WIP)
 AREA - Find Area
 PERI - Perimeter
 VOLU - Find Volume
 SURA - Find Surface Area
 
 With more being planned in the future.
+
+(WARNING, anything labeled as "WIP" is still being worked on, expect incorrect or broken answers)
 
 OCalc is freely distributable under the GNU GPL v3.0 license. This program was published by Regnbuebörk on the 26th of May, 2026. If you want to check out my sick site, check it out at https://silly-goober.neocities.org (EYESTRAIN AND FLASHY GRAPHICS WARNING)
 </pre>
