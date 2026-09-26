@@ -2,41 +2,42 @@ import math
 import random
 import os
 
-ver = "v1.0"
+ver = "v1.2" #Version Number
+result = 0 #Result of the answer
+memory = 0 #Memory (Saved Result)
 
 #Misc Functions
 def prompt(): #Help
     print('''
-    NOTE: Commands are not Case Sensitive.
-    
-    Available Commands:
-    HELP - list available commands
-    QUIT - Quit/Exit Program
-    ABOUT - Information about the program
-    CLEAR - clear screen
-    MLOAD - Load from Memory
-    MSAVE - Save to Memory
-    MUL - Multiply
-    DIV - Divide
-    SUB - Subtract
-    ADD - Addition
-    ROOT - Root Extraction
-    EXPO - Exponentiation
-    PERC - Percentage
-    AVRG - Average Number
-    MEDN - Median Number
-    RAND - Random Number
-    TRIG - Trigonometry
-    PYTH - Pythagorian Theorem
-    AREA - Find Area
-    PERI - Perimeter
-    VOLU - Find Volume
-    SURA - Find Surface Area
+NOTE: Commands are not case sensitive.
+
+Available commands & Functions:
+======================================
+QUIT - Quit/Exit Program
+ABOUT - Information about the Program
+CLEAR - Clear Screen
+MLOAD - Load from Memory
+MSAVE - Save to Memory
+MCLEAR - Clear Memory (Back to 0)
+MUL - Multiply
+DIV - Divide
+SUB - Subtract
+ADD - Addition
+ROOT - Root Extraction
+EXPO - Exponentiation
+PERC - Percentage
+AVRG - Average Number
+MEDN - Median Number
+RAND - Random Number
+TRIG - Trigonometry (WIP)
+PYTH - Pythagorian Theorem (WIP)
+AREA - Find Area
+PERI - Find Perimeter
+VOLU - Find Volume
+SURA - Find Surface Area
+======================================
     ''')
     return
-
-result = 0
-m1 = 0
 
 def close(): #Quit Program
     print("Exiting Program")
@@ -47,11 +48,11 @@ def about(): #About the program
     print(f"OCalc {ver} by Regnbuebörk (Started 21/5/2026)")
     print("This is an Open Source multi-function & multi-purpose calculator program written entirely by one person in Python (NO AI) using PyCharm. It was mainly done to test my abilities in Python, as well as the fact I do not like most calculator programs and prefer the CLI interface. This program is intended to be published on pip and such for public usage and evaluation. Do note the program is very early in development and I am a beginner in Python. Thus, several functions may be incorrect and bugs may populate the code, despite my attempts to repair them. If you encounter any issues, please note them in the github and give me time to review, fix, and update the code and github repository with newer versions.")
 
-def clear():
+def clear(): #Clear Screen
     # noinspection PyDeprecation
     os.system('cls' if os.name == 'nt' else 'clear')
     print("REGNBUEBÖRK Software 2026 - OCalc")
-    print('Type "HELP" for a list of commands')
+    print('Type HELP for a list of commands')
 
 #Actual Calculation
 def mul(): #Multiplication
@@ -110,33 +111,193 @@ def perc(): #Percentage
     return
 
 def trig(): #Trigonometry
-    global result
-    num1 = int(input('Angle Degree: '))
-    num2 = math.radians(num1)
-    while True:
-     sct = input("Sin, Cos, or Tan: ").upper()
-     if sct == "SIN":
-         result = (math.sin(num2))
-         print(result)
-         break
-     if sct == "COS":
-         result = (math.cos(num2))
-         print(result)
-         break
-     if sct == "TAN":
-         result = (math.tan(num2))
-         print(result)
-         break
-     if sct == "":
-         continue
-     else:
-         print("Please input Sin, Cos, or Tan")
-         continue
+ global result
+ while True:
+    miss = input("Are you looking for DEGREE or SIDE?: ").upper()
+
+    if miss == "DEGREE":
+
+     while True:
+        sct = input("Enter Ratio (Type HELP for a list of ratios): ").upper()
+
+        if sct == "SIN":
+            num1 = int(input("Enter Opposite "))
+            num2 = int(input("Enter Hypotenuse "))
+            result = math.asin(num1 / num2)
+            result = math.degrees(result)
+            print(f"{result}°")
+
+        if sct == "COS":
+            num1 = int(input("Enter Adjacent "))
+            num2 = int(input("Enter Hypotenuse "))
+            result = math.acos(num1 / num2)
+            result = math.degrees(result)
+            print(f"{result}°")
+            break
+        if sct == "TAN":
+            num1 = int(input("Enter Opposite "))
+            num2 = int(input("Enter Adjacent "))
+            result = math.atan(num1 / num2)
+            result = math.degrees(result)
+            print(f"{result}°")
+            break
+        if sct == "SEC":
+            num1 = int(input("Enter Hypotenuse "))
+            num2 = int(input("Enter Adjacent "))
+            result = math.acos(num1 / num2)
+            result = math.degrees(result)
+            print(f"{result}°")
+        if sct == "COT":
+            num1 = int(input("Enter Adjacent "))
+            num2 = int(input("Enter Opposite "))
+            result = math.atan(num1 / num2)
+            result = math.degrees(result)
+            print(f"{result}°")
+            break
+        if sct == "CSC":
+            num1 = int(input("Enter Hypotenuse "))
+            num2 = int(input("Enter Opposite "))
+            result = math.asin(num1 / num2)
+            result = math.degrees(result)
+            print(f"{result}°")
+            break
+        if sct == "CANCEL":
+            break
+
+        if sct == "QUIT":
+            exit()
+
+        if sct == "HELP":
+            print('''
+Available Ratios:
+======================================
+SIN - Sine
+COS - Cosine
+TAN - Tangent
+CSC - Cosec
+SEC - Second
+COT - Cot
+CANCEL - Cancel
+======================================
+             ''')
+        if sct == "":
+            continue
+        else:
+            continue
+
+
+
+    if miss == "SIDE":
+     while True:
+        sct = input("Enter Ratio (Type HELP for a list of ratios): ").upper()
+
+        if sct == "SIN":
+         while True:
+
+             func = input("Are you looking for opposite or hypotenuse?: ").upper()
+             
+             if func == "OPPOSITE":
+              num1 = int(input("Enter Hypotenuse: "))
+              num2 = int(input("Enter Angle Degrees: "))
+              num2 = math.radians(num2)
+              result = num1 * math.sin(num2)
+              print(f"{result}°")
+              break
+
+             if func == "HYPOTENUSE":
+              num1 = int(input("Enter Opposite : "))
+              num2 = int(input("Enter Angle Degrees: "))
+              num2 = math.radians(num2)
+              result = num1 * math.sin(num2)
+              print(f"{result}°")
+              break
+
+             else:
+              continue
+
+        if sct == "COS":
+         while True:
+
+             func = input("Are you looking for adjacent or hypotenuse?: ").upper()
+             if func == "ADJACENT":
+              num1 = int(input("Enter hypotenuse: "))
+              num2 = int(input("Enter Angle Degrees: "))
+              num2 = math.radians(num2)
+              result = num1 * math.cos(num2)
+              print(f"{result}°")
+              break
+
+             if func == "HYPOTENUSE":
+              num1 = int(input("Enter adjacent: "))
+              num2 = int(input("Enter Angle Degrees: "))
+              num2 = math.radians(num2)
+              result = num1 * math.cos(num2)
+              print(f"{result}°")
+              break
+
+             else:
+                 continue
+
+        if sct == "TAN":
+            while True:
+
+                func = input("Are you looking for opposite or adjacent?: ").upper()
+                if func == "OPPOSITE":
+                    num1 = int(input("Enter adjacent: "))
+                    num2 = int(input("Enter Angle Degrees: "))
+                    num2 = math.radians(num2)
+                    result = num1 * math.tan(num2)
+                    print(f"{result}°")
+                    break
+
+                if func == "ADJACENT":
+                    num1 = int(input("Enter opposite: "))
+                    num2 = int(input("Enter Angle Degrees: "))
+                    num2 = math.radians(num2)
+                    result = num1 * math.tan(num2)
+                    print(f"{result}°")
+                    break
+
+                else:
+                    continue
+
+        if sct == "CANCEL":
+            break
+
+        if sct == "QUIT":
+            exit()
+
+        if sct == "HELP":
+            print('''
+Available Ratios:
+======================================
+SIN - Sine
+COS - Cosine
+TAN - Tangent
+CSC - Cosec
+SEC - Second
+COT - Cot
+CANCEL - Cancel
+======================================
+             ''')
+        if sct == "":
+            continue
+        else:
+            continue
+    if miss == "CANCEL":
+        break
+
+    else:
+        continue
+
+
+
+
 
 def pyth(): #Pythagorean Theorem
     while True:
         global result
-        q = input("Are you solving HYP(otenuse) or SIDE?: ").upper()
+        q = input("Input HYP or SIDE (Cancel to exit): ").upper()
         if q == "HYP":
             num1 = int(input("Enter first side: "))
             num2 = int(input("Enter second side: "))
@@ -151,6 +312,12 @@ def pyth(): #Pythagorean Theorem
             print(result)
             break
 
+        if q == "CANCEL":
+            break
+
+        if q == "QUIT":
+            exit()
+
         if q == "":
             continue
 
@@ -158,15 +325,16 @@ def pyth(): #Pythagorean Theorem
             print("Please input SIDE or HYP")
             continue
 
-def rand():
+def rand(): #Random Number
     global result
     num1 = int(input("Enter minimum: "))
     num2 = int(input("Enter maximum: "))
     result = random.randint(num1, num2)
     print(result)
 
-def avg():
+def avg(): #Average Number
     global result
+    print("Press [ENTER] with a clear input to continue.")
     list_grab = []
     total = 0
     while True:
@@ -180,8 +348,9 @@ def avg():
     result = (sum(list_grab)) / total
     print(result)
 
-def median():
+def median(): #Median
     global result
+    print("Press [ENTER] with a clear input to continue.")
     list_grab = []
     total = 0
     while True:
@@ -204,25 +373,25 @@ def median():
 
 #Dimensions
 
-def peri():
+def peri(): #Find Perimeter
     while True:
         global result
         q = input("Input Shape (Type Shapes for a list of shapes): ").upper()
 
-        if q == "SQUARE":
+        if q == "SQAR":
             num1 = int(input("Enter sides: "))
             result = 4 * num1
             print(result)
             break
 
-        if q == "RECTANGLE":
+        if q == "RECT":
             num1 = int(input("Enter length: "))
             num2 = int(input("Enter width: "))
             result = 2 * (num1 * num2)
             print(result)
             break
 
-        if q == "TRIANGLE":
+        if q == "TRIG":
             num1 = int(input("Side 1 length: "))
             num2 = int(input("Side 2 length: "))
             num3 = int(input("Side 3 length: "))
@@ -230,14 +399,14 @@ def peri():
             print(result)
             break
 
-        if q == "PARALLELOGRAM":
+        if q == "PARA":
             num1 = int(input("Enter base: "))
             num2 = int(input("Enter height: "))
             result = 2 * (num1 * num2)
             print(result)
             break
 
-        if q == "TRAPEZOID":
+        if q == "TRAP":
             num1 = int(input("Enter side 1: "))
             num2 = int(input("Enter side 2: "))
             num3 = int(input("Enter side 3: "))
@@ -246,38 +415,48 @@ def peri():
             print(result)
             break
 
-        if q == "RHOMBUS":
+        if q == "ROMB":
             num1 = int(input("Enter side: "))
             result = num1 * 4
             print(result)
             break
 
-        if q == "CIRCLE":
+        if q == "CIRC":
             num1 = int(input("Enter radius: "))
             result = 2 * 3.1415 * num1
             print(result)
             break
 
-        if q == "POLYGON":
+        if q == "POLY":
             num1 = int(input("How many sides does your pentagon have?: "))
             num2 = int(input("What is the side length?: "))
             result = num1 * num2
             print(result)
             break
 
+        if q == "CANCEL":
+            break
+
+        if q == "QUIT":
+            exit()
+
         if q == "":
             continue
 
         if q == "SHAPES":
             print('''
-            Square
-            Rectangle
-            Triangle
-            Paralellogram
-            Trapezoid
-            Rhombus
-            Circle
-            Polygon (Pentagon, Hexagon, ETC.)
+Available shapes:
+======================================
+SQAR - Square
+RECT - Rectangle
+TRIG - Triangle
+PARA - Paralellogram
+TRAP - Trapezoid
+ROMB - Rhombus
+CIRC - Circle
+POLY - Polygon (Pentagon, Hexagon, ETC.)
+CANCEL - Cancel prompt
+======================================
             ''')
             continue
 
@@ -285,39 +464,39 @@ def peri():
             print("Please input which shape you want. (Type List for a list of shapes)")
             continue
 
-def area():
+def area(): #Find Area
     while True:
         global result
         q = input("Input Shape (Type Shapes for a list of shapes): ").upper()
 
-        if q == "SQUARE":
+        if q == "SQAR":
             num1 = int(input("Enter sides: "))
             result = num1 ** 2
             print(result)
             break
 
-        if q == "RECTANGLE":
+        if q == "RECT":
             num1 = int(input("Enter length: "))
             num2 = int(input("Enter width: "))
             result = num1 * num2
             print(result)
             break
 
-        if q == "TRIANGLE":
+        if q == "TRIG":
             num1 = int(input("Enter base: "))
             num2 = int(input("Enter height: "))
             result = (num1 * num2) / 2
             print(result)
             break
 
-        if q == "PARALLELOGRAM":
+        if q == "PARA":
             num1 = int(input("Enter base: "))
             num2 = int(input("Enter height: "))
             result = num1 * num2
             print(result)
             break
 
-        if q == "TRAPEZOID":
+        if q == "TRAP":
             num1 = int(input("Enter base 1: "))
             num2 = int(input("Enter base 2: "))
             num3 = int(input("Enter height: "))
@@ -325,20 +504,20 @@ def area():
             print(result)
             break
 
-        if q == "RHOMBUS":
+        if q == "ROMB":
             num1 = int(input("Enter diagnol 1: "))
             num2 = int(input("Enter diagnol 2: "))
             result = (num1 * num2) / 2
             print(result)
             break
 
-        if q == "CIRCLE":
+        if q == "CIRC":
             num1 = int(input("Enter radius: "))
             result = 3.1415 * (num1 ** 2)
             print(result)
             break
 
-        if q == "POLYGON":
+        if q == "POLY":
             num1 = int(input("How many sides does your pentagon have?: "))
             num2 = int(input("What is the side length?: "))
             num3 = int(input("What is the apothem length?: "))
@@ -346,19 +525,29 @@ def area():
             print(result)
             break
 
+        if q == "CANCEL":
+            break
+
+        if q == "QUIT":
+            exit()
+
         if q == "":
             continue
 
         if q == "SHAPES":
             print('''
-            Square
-            Rectangle
-            Triangle
-            Paralellogram
-            Trapezoid
-            Rhombus
-            Circle
-            Polygon (Pentagon, Hexagon, ETC.)
+Available shapes:
+======================================
+SQAR - Square
+RECT - Rectangle
+TRIG - Triangle
+PARA - Paralellogram
+TRAP - Trapezoid
+ROMB - Rhombus
+CIRC - Circle
+POLY - Polygon (Pentagon, Hexagon, ETC.)
+CANCEL - Cancel prompt
+======================================
             ''')
             continue
 
@@ -377,7 +566,7 @@ def sura():  # Find Surface Area
             print(result)
             break
 
-        if q == "RECTANGULAR PRISM":
+        if q == "RPRM":
             num1 = int(input("Enter length: "))
             num2 = int(input("Enter width: "))
             num3 = int(input("Enter height: "))
@@ -385,7 +574,7 @@ def sura():  # Find Surface Area
             print(result)
             break
 
-        if q == "RECTANGULAR PYRAMID":
+        if q == "RPYR":
             num1 = int(input("Enter Base Width: "))
             num2 = int(input("Enter Base Length: "))
             num3 = int(input("Enter Height: "))
@@ -395,7 +584,7 @@ def sura():  # Find Surface Area
             print(result)
             break
 
-        if q == "TRIANGULAR PRISM":
+        if q == "TPRM":
             num1 = int(input("Enter Base Width: "))
             num2 = int(input("Enter Base Length: "))
             num3 = int(input("Enter Height: "))
@@ -404,13 +593,13 @@ def sura():  # Find Surface Area
             print(result)
             break
 
-        if q == "SPHERE":
+        if q == "SPRE":
             num1 = int(input("Enter Radius: "))
             result = 4 * 3.1415 * (num1 ** 2)
             print(result)
             break
 
-        if q == "CYLINDER":
+        if q == "CYLD":
             num1 = int(input("Enter Radius: "))
             num2 = int(input("Enter Height: "))
             result = (2 * 3.1415 * (num1 ** 2)) + (2 * 3.1415 * num1 * num2)
@@ -420,14 +609,24 @@ def sura():  # Find Surface Area
         if q == "":
             continue
 
+        if q == "CANCEL":
+            break
+
+        if q == "QUIT":
+            exit()
+
         if q == "SHAPES":
             print('''
-            Cube
-            Rectangular Prism
-            Triangular Prism
-            Rectangular Pyramid
-            Cylinder
-            Sphere
+Available shapes:
+======================================
+CUBE - Cube
+RPRM - Rectangular Prism
+TPRM - Triangular Prism
+RPYR - Rectangular Pyramid
+CYLD - Cylinder
+SPRE - Sphere
+CANCEL - Cancel prompt
+======================================
             ''')
             continue
 
@@ -446,7 +645,7 @@ def vol(): #Find Volume
             print(result)
             break
 
-        if q == "RECTANGULAR PRISM":
+        if q == "RPRM":
             num1 = int(input("Enter side 1: "))
             num2 = int(input("Enter side 2: "))
             num3 = int(input("Enter side 3: "))
@@ -454,7 +653,7 @@ def vol(): #Find Volume
             print(result)
             break
 
-        if q == "RECTANGULAR PYRAMID":
+        if q == "RPYR":
             num1 = int(input("Enter Base Width: "))
             num2 = int(input("Enter Base Length: "))
             num3 = int(input("Enter Height: "))
@@ -462,7 +661,7 @@ def vol(): #Find Volume
             print(result)
             break
 
-        if q == "TRIANGULAR PRISM":
+        if q == "TPRM":
             num1 = int(input("Enter Base Width: "))
             num2 = int(input("Enter Base Length: "))
             num3 = int(input("Enter Height: "))
@@ -470,30 +669,37 @@ def vol(): #Find Volume
             print(result)
             break
 
-        if q == "SPHERE":
+        if q == "SPRE":
             num1 = int(input("Enter Radius: "))
             result = 4/3 * math.pi * (num1 ** 3)
             print(result)
             break
 
-        if q == "CYLINDER":
+        if q == "CYLD":
             num1 = int(input("Enter Radius: "))
             num2 = int(input("Enter Height: "))
             result = ((num1 ** 2) * 3.14) * num2
             print(result)
             break
 
-        if q == "":
-            continue
+        if q == "CANCEL":
+            break
+
+        if q == "QUIT":
+            exit()
 
         if q == "SHAPES":
             print('''
-            Cube
-            Rectangular Prism
-            Triangular Prism
-            Rectangular Pyramid
-            Cylinder
-            Sphere
+Available shapes:
+======================================
+CUBE - Cube
+RPRM - Rectangular Prism
+TPRM - Triangular Prism
+RPYR - Rectangular Pyramid
+CYLD - Cylinder
+SPRE - Sphere
+CANCEL - Cancel prompt
+======================================
             ''')
             continue
 
@@ -501,13 +707,18 @@ def vol(): #Find Volume
             print("Please input which shape you want. (Type List for a list of shapes)")
             continue
 
-#Memory access (WIP)
+#Memory Functions
 
-def memsave():
-    global m1
-    m1 = result
-    print(f"Saved {m1} to memory")
+def memsave(): #Save to Memory
+    global memory
+    memory = result
+    print(f"Saved {memory} to memory")
 
-def memload():
-    global m1
-    print(m1)
+def memload(): #Load from Memory
+    global memory
+    print(memory)
+
+def memclear(): #Clear Memory
+    global memory
+    memory = 0
+    print("Memory Cleared")
