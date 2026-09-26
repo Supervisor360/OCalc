@@ -50,11 +50,11 @@ while True:
      perc()
      continue
 
- elif command == "TRIG": #Trigonometry
+ elif command == "TRIG": #Trigonometry (WIP)
      trig()
      continue
 
- elif command == "PYTH": #Pythagorean Theorem
+ elif command == "PYTH": #Pythagorean Theorem (WIP)
      pyth()
      continue
 
@@ -66,19 +66,19 @@ while True:
      avg()
      continue
 
- elif command == "MEDN": #Mean
+ elif command == "MEDN": #Median
      median()
      continue
 
- elif command == "PERI": #Volume
+ elif command == "PERI": #Perimeter
      peri()
      continue
 
- elif command == "AREA": #Volume
+ elif command == "AREA": #Area
      area()
      continue
 
- elif command == "SURA": #Volume
+ elif command == "SURA": #Surface Area
      sura()
      continue
 
@@ -86,14 +86,16 @@ while True:
      vol()
      continue
 
- #Memory access (WIP)
-
- elif command == "MSAVE": #Pythagorean Theorem
+ elif command == "MSAVE": #Save to memory
      memsave()
      continue
 
- elif command == "MLOAD": #Pythagorean Theorem
+ elif command == "MLOAD": #Load from memory
      memload()
+     continue
+
+ elif command == "MCLEAR": #Clear memory
+     memclear()
      continue
 
  #Non input Commands
